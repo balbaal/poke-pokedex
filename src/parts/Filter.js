@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { GlobalConsumer } from "configs/context";
 
 // Component
 import { Input } from "elements";
@@ -17,8 +18,10 @@ const Filter = (props) => {
     <div className={["filter-nav", props.className].join(" ")}>
       <Input
         placeholder="Name"
-        value={searchPokemon}
-        onChange={(e) => setSearchPokemon(e.target.value)}
+        value={props.state.filter.name}
+        onChange={(e) =>
+          props.dispatch({ type: "FILTER_NAME", payload: e.target.value })
+        }
       />
       <Input
         type="select"
@@ -38,4 +41,4 @@ const Filter = (props) => {
   );
 };
 
-export default Filter;
+export default GlobalConsumer(Filter);

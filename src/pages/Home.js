@@ -19,14 +19,21 @@ class Home extends React.Component {
               <Brand style={{ width: 150 }} src="/images/pokemon_logo.png" />
               <Filter className="mt-4" />
               <div className="d-flex flex-column align-items-center justify-content-center mt-5">
-                {this.props.state.pokemonList.length > 0 ? (
-                  <Table data={this.props.state.pokemonList} />
-                ) : (
+                {this.props.state.isLoading ? (
+                  <h1>loading . . .</h1>
+                ) : this.props.state.errorMessage ||
+                  this.props.state.pokemonList.length === 0 ? (
                   <StatusPage
                     src="/images/pokemon_logo.png"
-                    title="Oops! No pokemon found!"
+                    title={
+                      this.props.state.errorMessage
+                        ? this.props.state.errorMessage
+                        : "Oops! No pokemon found!"
+                    }
                     style={{ width: "200px" }}
                   />
+                ) : (
+                  <Table data={this.props.state.pokemonList} />
                 )}
               </div>
             </ColumnFirst>

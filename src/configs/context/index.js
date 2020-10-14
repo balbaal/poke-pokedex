@@ -10,27 +10,78 @@ export const GlobalProvider = (Children) => {
     state = {
       pokemonList: [],
       isLoading: true,
+      errorMessage: "",
+      filter: {
+        name: "",
+        type: null,
+        ability: null,
+      },
     };
 
     dispatch = async (action) => {
-      if (action.type === "FETCH_POKEMON") {
-        this.setState({
-          ...this.state,
-          isLoading: true,
-        });
+      switch (action.type) {
+        case "FETCH_POKEMON":
+          this.setState({
+            ...this.state,
+            isLoading: true,
+          });
 
-        const resPokemon = await axios.get("/pokemon");
-        const resPokemonFinal = await Promise.all(
-          resPokemon.results.map(async (item) => {
-            return await axios.get(`/pokemon/${item.name}`);
-          })
-        );
+          const resPokemon = await axios.get("/pokemon");
+          const resPokemonFinal = await Promise.all(
+            resPokemon.results.map(async (item) => {
+              return await axios.get(`/pokemon/${item.name}`);
+            })
+          );
 
-        this.setState({
-          ...this.state,
-          isLoading: false,
-          pokemonList: resPokemonFinal,
-        });
+          this.setState({
+            ...this.state,
+            isLoading: false,
+            pokemonList: resPokemonFinal,
+          });
+          break;
+
+        case "FILTER_NAME":
+          this.setState({
+            ...this.state,
+            filter: {
+              type: null,
+              ability: null,
+              name: action.payload,
+            },
+          });
+
+          try {
+            const resPokemonByName = await axios.get(
+              `/pokemon/${action.payload}`
+            );
+
+            let resPokemonByNameFinal = [];
+            if (resPokemonByName.count) {
+              resPokemonByNameFinal = await Promise.all(
+                resPokemonByName.results.map(async (item) => {
+                  return await axios.get(`/pokemon/${item.name}`);
+                })
+              );
+            } else {
+              resPokemonByNameFinal.push(resPokemonByName);
+            }
+
+            this.setState({
+              ...this.state,
+              isLoading: false,
+              pokemonList: resPokemonByNameFinal,
+              errorMessage: "",
+            });
+          } catch (error) {
+            this.setState({
+              ...this.state,
+              errorMessage: error.response.data,
+            });
+          }
+          break;
+
+        default:
+          break;
       }
     };
 
