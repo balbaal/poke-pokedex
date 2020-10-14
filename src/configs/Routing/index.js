@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { GlobalProvider } from "configs/context";
 
 // Pages
 import Home from "pages/Home";
@@ -18,4 +19,4 @@ const Routing = () => {
   );
 };
 
-export default Routing;
+export default GlobalProvider(Routing);
