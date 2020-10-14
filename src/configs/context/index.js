@@ -1,12 +1,12 @@
-import React, { createContext } from "react";
+import React, { Children, createContext } from "react";
 import { axios } from "configs";
 
-export const RootContext = createContext();
-const Provider = RootContext.Provider;
+const RootContext = createContext();
 
 // Provider
-const GlobalProvider = (Children) => {
-  return class ParentComponent extends React.Component {
+const Provider = RootContext.Provider;
+export const GlobalProvider = (Children) => {
+  return class ParentProvider extends React.Component {
     state = {
       pokemonList: [],
       isLoading: true,
@@ -44,4 +44,18 @@ const GlobalProvider = (Children) => {
   };
 };
 
-export default GlobalProvider;
+// Consumer
+const Consumer = RootContext.Consumer;
+export const GlobalConsumer = (Children) => {
+  return class ParentConsumer extends React.Component {
+    render() {
+      return (
+        <Consumer>
+          {(value) => {
+            return <Children {...this.props} {...value} />;
+          }}
+        </Consumer>
+      );
+    }
+  };
+};
