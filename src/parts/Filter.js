@@ -3,7 +3,7 @@ import React, { useState } from "react";
 // Component
 import { Input } from "elements";
 
-const Filter = () => {
+const Filter = (props) => {
   const optionsPokemon = [
     { value: "Chocolate", label: "Chocolate" },
     { value: "Strawberry", label: "Strawberry" },
@@ -12,7 +12,7 @@ const Filter = () => {
   const [selectedPokemon, setSelectedPokemon] = useState(null);
 
   return (
-    <div className="filter-nav">
+    <div className={["filter-nav", props.className].join(" ")}>
       <Input
         type="select"
         placeholder="Name"
