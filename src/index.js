@@ -5,12 +5,12 @@ import './assets/css/style.sass';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-// Pages
-import Home from 'pages/Home';
+// Routing
+import { Routing } from "configs";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Home />
+    <Routing />
   </React.StrictMode>,
   document.getElementById('root')
 );
