@@ -15,7 +15,8 @@ const Input = (props) => {
 
   return (
     <input
-      type={props.type}
+      placeholder={props.placeholder}
+      type="text"
       value={props.value}
       onChange={props.onChange}
       className={["form-control", props.className].join(" ")}

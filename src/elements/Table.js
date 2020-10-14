@@ -12,24 +12,21 @@ const Table = (props) => {
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <th scope="row">1</th>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-        </tr>
-        <tr>
-          <th scope="row">2</th>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-        </tr>
-        <tr>
-          <th scope="row">3</th>
-          <td>Jacob</td>
-          <td>Thornton</td>
-          <td>@fat</td>
-        </tr>
+        {props.data.map((item, i) => {
+          const types = item.types.map((type) => type.type.name);
+          const abilities = item.abilities.map(
+            (ability) => ability.ability.name
+          );
+
+          return (
+            <tr>
+              <th scope="row">{i + 1}</th>
+              <td className="text-capitalize">{item.name}</td>
+              <td>{types.join(", ")}</td>
+              <td>{abilities.join(", ")}</td>
+            </tr>
+          );
+        })}
       </tbody>
     </table>
   );

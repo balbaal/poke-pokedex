@@ -9,16 +9,16 @@ const Filter = (props) => {
     { value: "Strawberry", label: "Strawberry" },
   ];
 
+  const [searchPokemon, setSearchPokemon] = useState("");
+
   const [selectedPokemon, setSelectedPokemon] = useState(null);
 
   return (
     <div className={["filter-nav", props.className].join(" ")}>
       <Input
-        type="select"
         placeholder="Name"
-        options={optionsPokemon}
-        value={selectedPokemon}
-        onChange={(selectedOption) => setSelectedPokemon(selectedOption)}
+        value={searchPokemon}
+        onChange={(e) => setSearchPokemon(e.target.value)}
       />
       <Input
         type="select"
