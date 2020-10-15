@@ -28,8 +28,8 @@ class Home extends React.Component {
                     src="/images/pokemon_logo.png"
                     title={
                       this.props.state.errorMessage
-                        ? this.props.state.errorMessage
-                        : "Oops! No pokemon found!"
+                        ? "Oops! No pokemon found!"
+                        : this.props.state.errorMessage
                     }
                     style={{ width: "200px" }}
                   />
@@ -41,7 +41,7 @@ class Home extends React.Component {
           </div>
           <div className="col-12 col-md-6">
             <ColumnFirst>
-              <div className="d-flex flex-column align-items-center justify-content-center">
+              <div className="vh-100 d-flex flex-column align-items-center justify-content-center">
                 {this.props.state.isFetchDetail ? (
                   <h1>loading . . .</h1>
                 ) : !this.props.state.detail ? (
