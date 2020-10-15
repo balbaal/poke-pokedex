@@ -68,7 +68,7 @@ export const GlobalProvider = (Children) => {
             ...this.state,
             isLoading: false,
             errorMessage: "",
-            pokemonList: resPokemonFinal,
+            pokemonList: [...this.state.pokemonList, ...resPokemonFinal],
           });
           break;
 
