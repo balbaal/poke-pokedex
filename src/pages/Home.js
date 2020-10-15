@@ -44,7 +44,7 @@ class Home extends React.Component {
                 ) : (
                   <div
                     style={{ height: "calc(100vh - 18vh)" }}
-                    className="overflow-auto"
+                    className="w-100 overflow-auto"
                   >
                     <Table data={this.props.state.pokemonList} />
                   </div>
