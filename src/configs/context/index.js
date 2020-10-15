@@ -11,6 +11,8 @@ export const GlobalProvider = (Children) => {
       pokemonList: [],
       isLoading: true,
       errorMessage: "",
+      optionsType: [],
+      optionsAbility: [],
       filter: {
         name: "",
         type: null,
@@ -20,6 +22,26 @@ export const GlobalProvider = (Children) => {
 
     dispatch = async (action) => {
       switch (action.type) {
+        case "FETCH_TYPE_ABILITY":
+          let resTypes = await axios.get("/type");
+          resTypes = resTypes.results.map((item) => ({
+            value: item.name,
+            label: item.name,
+          }));
+
+          let resAbilities = await axios.get("/ability?limit=50");
+          resAbilities = resAbilities.results.map((item) => ({
+            value: item.name,
+            label: item.name,
+          }));
+
+          this.setState({
+            ...this.state,
+            optionsType: resTypes,
+            optionsAbility: resAbilities,
+          });
+
+          break;
         case "FETCH_POKEMON":
           this.setState({
             ...this.state,
@@ -38,6 +60,43 @@ export const GlobalProvider = (Children) => {
             isLoading: false,
             pokemonList: resPokemonFinal,
           });
+          break;
+
+        case "FILTER_TYPE":
+          this.setState({
+            ...this.state,
+            isLoading: true,
+            filter: {
+              name: "",
+              type: action.payload,
+              ability: null,
+            },
+          });
+
+          try {
+            let resPokemonByType = await axios.get(
+              `/type/${action.payload.value}`
+            );
+            resPokemonByType = await Promise.all(
+              resPokemonByType.pokemon.map(async (item) => {
+                let resPokemon = await axios.get(
+                  `/pokemon/${item.pokemon.name}`
+                );
+                return resPokemon;
+              })
+            );
+
+            this.setState({
+              ...this.state,
+              isLoading: false,
+              pokemonList: resPokemonByType,
+            });
+          } catch (error) {
+            this.setState({
+              ...this.state,
+              errorMessage: error.response.data,
+            });
+          }
           break;
 
         case "FILTER_NAME":

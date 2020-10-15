@@ -5,11 +5,6 @@ import { GlobalConsumer } from "configs/context";
 import { Input } from "elements";
 
 const Filter = (props) => {
-  const optionsPokemon = [
-    { value: "Chocolate", label: "Chocolate" },
-    { value: "Strawberry", label: "Strawberry" },
-  ];
-
   const [searchPokemon, setSearchPokemon] = useState("");
 
   const [selectedPokemon, setSelectedPokemon] = useState(null);
@@ -26,14 +21,19 @@ const Filter = (props) => {
       <Input
         type="select"
         placeholder="Type"
-        options={optionsPokemon}
-        value={null}
-        onChange={(selectedOption) => {}}
+        options={props.state.optionsType}
+        value={props.state.filter.type}
+        onChange={(selectedOption) => {
+          props.dispatch({
+            type: "FILTER_TYPE",
+            payload: selectedOption,
+          });
+        }}
       />
       <Input
         type="select"
         placeholder="Ability"
-        options={optionsPokemon}
+        options={props.state.optionsAbility}
         value={null}
         onChange={(selectedOption) => {}}
       />

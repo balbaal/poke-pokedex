@@ -8,13 +8,14 @@ import { Brand, StatusPage, Table } from "elements";
 class Home extends React.Component {
   async componentDidMount() {
     this.props.dispatch({ type: "FETCH_POKEMON" });
+    this.props.dispatch({ type: "FETCH_TYPE_ABILITY" });
   }
 
   render() {
     return (
       <div className="container-fluid">
         <div className="row">
-          <div className="col-12 col-md-6">
+          <div className="col-12 col-md-6 mb-4">
             <ColumnFirst>
               <Brand style={{ width: 150 }} src="/images/pokemon_logo.png" />
               <Filter className="mt-4" />
