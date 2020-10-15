@@ -29,7 +29,7 @@ export const GlobalProvider = (Children) => {
             label: item.name,
           }));
 
-          let resAbilities = await axios.get("/ability?limit=50");
+          let resAbilities = await axios.get("/ability");
           resAbilities = resAbilities.results.map((item) => ({
             value: item.name,
             label: item.name,
@@ -68,8 +68,8 @@ export const GlobalProvider = (Children) => {
             isLoading: true,
             filter: {
               name: "",
-              type: action.payload,
               ability: null,
+              type: action.payload,
             },
           });
 
@@ -90,6 +90,43 @@ export const GlobalProvider = (Children) => {
               ...this.state,
               isLoading: false,
               pokemonList: resPokemonByType,
+            });
+          } catch (error) {
+            this.setState({
+              ...this.state,
+              errorMessage: error.response.data,
+            });
+          }
+          break;
+
+        case "FILTER_ABILITY":
+          this.setState({
+            ...this.state,
+            isLoading: true,
+            filter: {
+              name: "",
+              type: null,
+              ability: action.payload,
+            },
+          });
+
+          try {
+            let resPokemonByAbility = await axios.get(
+              `/ability/${action.payload.value}`
+            );
+            resPokemonByAbility = await Promise.all(
+              resPokemonByAbility.pokemon.map(async (item) => {
+                let resPokemon = await axios.get(
+                  `/pokemon/${item.pokemon.name}`
+                );
+                return resPokemon;
+              })
+            );
+
+            this.setState({
+              ...this.state,
+              isLoading: false,
+              pokemonList: resPokemonByAbility,
             });
           } catch (error) {
             this.setState({

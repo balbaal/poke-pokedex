@@ -34,8 +34,13 @@ const Filter = (props) => {
         type="select"
         placeholder="Ability"
         options={props.state.optionsAbility}
-        value={null}
-        onChange={(selectedOption) => {}}
+        value={props.state.filter.ability}
+        onChange={(selectedOption) => {
+          props.dispatch({
+            type: "FILTER_ABILITY",
+            payload: selectedOption,
+          });
+        }}
       />
     </div>
   );
