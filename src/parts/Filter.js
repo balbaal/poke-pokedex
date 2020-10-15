@@ -5,10 +5,6 @@ import { GlobalConsumer } from "configs/context";
 import { Input } from "elements";
 
 const Filter = (props) => {
-  const [searchPokemon, setSearchPokemon] = useState("");
-
-  const [selectedPokemon, setSelectedPokemon] = useState(null);
-
   return (
     <div className={["filter-nav", props.className].join(" ")}>
       <Input

@@ -1,8 +1,9 @@
 import React from "react";
+import { GlobalConsumer } from "configs/context";
 
 const Table = (props) => {
   return (
-    <table class="table table-hover">
+    <table className="table table-hover">
       <thead>
         <tr>
           <th scope="col">#</th>
@@ -13,13 +14,19 @@ const Table = (props) => {
       </thead>
       <tbody>
         {props.data.map((item, i) => {
-          const types = item.types.map((type) => type.type.name);
+          const types = item.types.map((type, i) => type.type.name);
           const abilities = item.abilities.map(
             (ability) => ability.ability.name
           );
 
           return (
-            <tr>
+            <tr
+              key={i}
+              style={{ cursor: "pointer" }}
+              onClick={() =>
+                props.dispatch({ type: "FETCH_DETAIL", payload: item })
+              }
+            >
               <th scope="row">{i + 1}</th>
               <td className="text-capitalize">{item.name}</td>
               <td>{types.join(", ")}</td>
@@ -32,4 +39,4 @@ const Table = (props) => {
   );
 };
 
-export default Table;
+export default GlobalConsumer(Table);

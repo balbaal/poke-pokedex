@@ -9,10 +9,12 @@ export const GlobalProvider = (Children) => {
   return class ParentProvider extends React.Component {
     state = {
       pokemonList: [],
-      isLoading: true,
+      isLoading: false,
       errorMessage: "",
       optionsType: [],
       optionsAbility: [],
+      detail: null,
+      isFetchDetail: false,
       filter: {
         name: "",
         type: null,
@@ -22,6 +24,13 @@ export const GlobalProvider = (Children) => {
 
     dispatch = async (action) => {
       switch (action.type) {
+        case "FETCH_DETAIL":
+          this.setState({
+            ...this.state,
+            detail: action.payload,
+          });
+
+          break;
         case "FETCH_TYPE_ABILITY":
           let resTypes = await axios.get("/type");
           resTypes = resTypes.results.map((item) => ({

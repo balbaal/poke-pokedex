@@ -2,7 +2,7 @@ import React from "react";
 import { GlobalConsumer } from "configs/context";
 
 // Component
-import { ColumnFirst, Filter } from "parts";
+import { ColumnFirst, Filter, Detail } from "parts";
 import { Brand, StatusPage, Table } from "elements";
 
 class Home extends React.Component {
@@ -42,11 +42,17 @@ class Home extends React.Component {
           <div className="col-12 col-md-6">
             <ColumnFirst>
               <div className="d-flex flex-column align-items-center justify-content-center">
-                <StatusPage
-                  src="/images/pokemon_logo.png"
-                  title="Select Pokemon"
-                  style={{ width: "200px" }}
-                />
+                {this.props.state.isFetchDetail ? (
+                  <h1>loading . . .</h1>
+                ) : !this.props.state.detail ? (
+                  <StatusPage
+                    src="/images/pokemon_logo.png"
+                    title="Select Pokemon"
+                    style={{ width: "200px" }}
+                  />
+                ) : (
+                  <Detail />
+                )}
               </div>
             </ColumnFirst>
           </div>
