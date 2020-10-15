@@ -1,6 +1,5 @@
 import React, { createContext } from "react";
 import { axios } from "configs";
-import { act } from "react-dom/test-utils";
 
 const RootContext = createContext();
 

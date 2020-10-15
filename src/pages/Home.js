@@ -25,10 +25,10 @@ class Home extends React.Component {
                   <div className="vh-100 d-flex justify-content-center align-items-center">
                     <div
                       style={{ marginTop: "-300px" }}
-                      class="spinner-border text-warning"
+                      className="spinner-border text-warning"
                       role="status"
                     >
-                      <span class="sr-only">Loading...</span>
+                      <span className="sr-only">Loading...</span>
                     </div>
                   </div>
                 ) : this.props.state.errorMessage ||
@@ -60,10 +60,10 @@ class Home extends React.Component {
                         <div className="text-center">
                           <div
                             style={{ marginTop: "-300px" }}
-                            class="spinner-border text-warning text-center"
+                            className="spinner-border text-warning text-center"
                             role="status"
                           >
-                            <span class="sr-only">Loading...</span>
+                            <span className="sr-only">Loading...</span>
                           </div>
                         </div>
                       }
