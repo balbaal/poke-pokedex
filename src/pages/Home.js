@@ -15,26 +15,39 @@ class Home extends React.Component {
     return (
       <div className="container-fluid">
         <div className="row">
-          <div className="col-12 col-md-6 mb-4">
+          <div className="col-12 col-md-6">
             <ColumnFirst>
               <Brand style={{ width: 150 }} src="/images/pokemon_logo.png" />
               <Filter className="mt-4" />
-              <div className="d-flex flex-column align-items-center justify-content-center mt-5">
+              <div className="d-flex flex-column align-items-center justify-content-center mt-3">
                 {this.props.state.isLoading ? (
-                  <h1>loading . . .</h1>
+                  <div className="vh-100 d-flex justify-content-center align-items-center">
+                    <div
+                      style={{ marginTop: "-300px" }}
+                      class="spinner-border text-warning"
+                      role="status"
+                    >
+                      <span class="sr-only">Loading...</span>
+                    </div>
+                  </div>
                 ) : this.props.state.errorMessage ||
                   this.props.state.pokemonList.length === 0 ? (
                   <StatusPage
                     src="/images/pokemon_logo.png"
+                    style={{ width: "200px", height: "100vh", marginTop: -130 }}
                     title={
                       this.props.state.errorMessage
                         ? "Oops! No pokemon found!"
                         : this.props.state.errorMessage
                     }
-                    style={{ width: "200px" }}
                   />
                 ) : (
-                  <Table data={this.props.state.pokemonList} />
+                  <div
+                    style={{ height: "calc(100vh - 18vh)" }}
+                    className="overflow-auto"
+                  >
+                    <Table data={this.props.state.pokemonList} />
+                  </div>
                 )}
               </div>
             </ColumnFirst>
@@ -47,7 +60,7 @@ class Home extends React.Component {
                 ) : !this.props.state.detail ? (
                   <StatusPage
                     src="/images/pokemon_logo.png"
-                    title="Select Pokemon"
+                    title="Select Pokemon!"
                     style={{ width: "200px" }}
                   />
                 ) : (
