@@ -2,7 +2,6 @@ import React from "react";
 import { GlobalConsumer } from "configs/context";
 
 const Detail = (props) => {
-  console.log(props.state);
   return (
     <>
       <div className="w-100 shadow-sm p-3 mb-4 bg-white rounded">

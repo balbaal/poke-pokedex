@@ -67,6 +67,7 @@ export const GlobalProvider = (Children) => {
           this.setState({
             ...this.state,
             isLoading: false,
+            errorMessage: "",
             pokemonList: resPokemonFinal,
           });
           break;
@@ -98,6 +99,7 @@ export const GlobalProvider = (Children) => {
             this.setState({
               ...this.state,
               isLoading: false,
+              errorMessage: "",
               pokemonList: resPokemonByType,
             });
           } catch (error) {
@@ -135,6 +137,7 @@ export const GlobalProvider = (Children) => {
             this.setState({
               ...this.state,
               isLoading: false,
+              errorMessage: "",
               pokemonList: resPokemonByAbility,
             });
           } catch (error) {
