@@ -1,5 +1,6 @@
 import React, { createContext } from "react";
 import { axios } from "configs";
+import { act } from "react-dom/test-utils";
 
 const RootContext = createContext();
 
@@ -15,6 +16,7 @@ export const GlobalProvider = (Children) => {
       optionsAbility: [],
       detail: null,
       isFetchDetail: false,
+      offset: 0,
       filter: {
         name: "",
         type: null,
@@ -57,7 +59,9 @@ export const GlobalProvider = (Children) => {
             isLoading: true,
           });
 
-          const resPokemon = await axios.get("/pokemon");
+          const resPokemon = await axios.get(
+            `/pokemon?offset=${action.payload + this.state.offset}`
+          );
           const resPokemonFinal = await Promise.all(
             resPokemon.results.map(async (item) => {
               return await axios.get(`/pokemon/${item.name}`);
@@ -68,6 +72,7 @@ export const GlobalProvider = (Children) => {
             ...this.state,
             isLoading: false,
             errorMessage: "",
+            offset: this.state.offset,
             pokemonList: [...this.state.pokemonList, ...resPokemonFinal],
           });
           break;

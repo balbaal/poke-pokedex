@@ -1,5 +1,6 @@
 import React from "react";
 import { GlobalConsumer } from "configs/context";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 // Component
 import { ColumnFirst, Filter, Detail } from "parts";
@@ -46,7 +47,29 @@ class Home extends React.Component {
                     style={{ height: "calc(100vh - 18vh)" }}
                     className="w-100 overflow-auto"
                   >
-                    <Table data={this.props.state.pokemonList} />
+                    <InfiniteScroll
+                      dataLength={this.props.state.pokemonList.length}
+                      next={() =>
+                        this.props.dispatch({
+                          type: "FETCH_POKEMON",
+                          payload: 20,
+                        })
+                      }
+                      hasMore={true}
+                      loader={
+                        <div className="text-center">
+                          <div
+                            style={{ marginTop: "-300px" }}
+                            class="spinner-border text-warning text-center"
+                            role="status"
+                          >
+                            <span class="sr-only">Loading...</span>
+                          </div>
+                        </div>
+                      }
+                    >
+                      <Table data={this.props.state.pokemonList} />
+                    </InfiniteScroll>
                   </div>
                 )}
               </div>
