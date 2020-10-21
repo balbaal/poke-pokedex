@@ -23,7 +23,7 @@ const Table = (props) => {
 
           return (
             <tr
-              className="table-pokemon__body__row"
+              className="table-pokemon__body__row text-center"
               key={i}
               style={{ cursor: "pointer" }}
               onClick={() =>
@@ -34,8 +34,8 @@ const Table = (props) => {
                 {i + 1}
               </th>
               <td className="text-capitalize">{item.name}</td>
-              <td>{types.join(", ")}</td>
-              <td>{abilities.join(", ")}</td>
+              <td>{types.length > 0 ? types.join(", ") : "-"}</td>
+              <td>{abilities.length > 0 ? abilities.join(", ") : "-"}</td>
             </tr>
           );
         })}
