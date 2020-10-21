@@ -59,9 +59,6 @@ export const GlobalProvider = (Children) => {
           });
 
           let countOffset = action.payload + this.state.offset;
-          console.log("action :>> ", action);
-          console.log("payload :>> ", action.payload);
-          console.log("this.state.offset :>> ", this.state.offset);
 
           const resPokemon = await axios.get(`/pokemon?offset=${countOffset}`);
           const resPokemonFinal = await Promise.all(
@@ -70,16 +67,13 @@ export const GlobalProvider = (Children) => {
             })
           );
 
-          this.setState(
-            {
-              ...this.state,
-              isLoading: false,
-              errorMessage: "",
-              offset: countOffset,
-              pokemonList: [...this.state.pokemonList, ...resPokemonFinal],
-            },
-            () => console.log(this.state.offset)
-          );
+          this.setState({
+            ...this.state,
+            isLoading: false,
+            errorMessage: "",
+            offset: countOffset,
+            pokemonList: [...this.state.pokemonList, ...resPokemonFinal],
+          });
           break;
 
         case "FILTER_TYPE":
