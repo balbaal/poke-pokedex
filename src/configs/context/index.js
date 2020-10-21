@@ -58,28 +58,35 @@ export const GlobalProvider = (Children) => {
             isLoading: true,
           });
 
-          const resPokemon = await axios.get(
-            `/pokemon?offset=${action.payload + this.state.offset}`
-          );
+          let countOffset = action.payload + this.state.offset;
+          console.log("action :>> ", action);
+          console.log("payload :>> ", action.payload);
+          console.log("this.state.offset :>> ", this.state.offset);
+
+          const resPokemon = await axios.get(`/pokemon?offset=${countOffset}`);
           const resPokemonFinal = await Promise.all(
             resPokemon.results.map(async (item) => {
               return await axios.get(`/pokemon/${item.name}`);
             })
           );
 
-          this.setState({
-            ...this.state,
-            isLoading: false,
-            errorMessage: "",
-            offset: this.state.offset,
-            pokemonList: [...this.state.pokemonList, ...resPokemonFinal],
-          });
+          this.setState(
+            {
+              ...this.state,
+              isLoading: false,
+              errorMessage: "",
+              offset: countOffset,
+              pokemonList: [...this.state.pokemonList, ...resPokemonFinal],
+            },
+            () => console.log(this.state.offset)
+          );
           break;
 
         case "FILTER_TYPE":
           this.setState({
             ...this.state,
             isLoading: true,
+            offset: 0,
             filter: {
               name: "",
               ability: null,
@@ -118,6 +125,7 @@ export const GlobalProvider = (Children) => {
           this.setState({
             ...this.state,
             isLoading: true,
+            offset: 0,
             filter: {
               name: "",
               type: null,
@@ -155,6 +163,7 @@ export const GlobalProvider = (Children) => {
         case "FILTER_NAME":
           this.setState({
             ...this.state,
+            offset: 0,
             filter: {
               type: null,
               ability: null,

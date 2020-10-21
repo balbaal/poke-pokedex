@@ -8,7 +8,7 @@ import { Brand, StatusPage, Table } from "elements";
 
 class Home extends React.Component {
   async componentDidMount() {
-    this.props.dispatch({ type: "FETCH_POKEMON" });
+    this.props.dispatch({ type: "FETCH_POKEMON", payload: 10 });
     this.props.dispatch({ type: "FETCH_TYPE_ABILITY" });
   }
 
