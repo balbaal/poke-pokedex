@@ -1,12 +1,10 @@
 
 // Import Bootstrap and its default variables
 @import '~bootstrap/scss/bootstrap.scss'
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap')
 
-html
-  // overflow: hidden
-
-.vh-100
-  height: 100vh
+body
+  font-family: 'Poppins', sans-serif !important
 
 .filter-nav
   display: flex
@@ -27,3 +25,65 @@ html
 
     &:last-child
       margin-right: 0
+
+.table-pokemon
+  &__body
+    &__row
+      transition: .3s
+
+      &:hover
+        transform: scale(1.03)
+
+// Animation
+// Credit theappguruz
+
+.tada
+  -webkit-animation-name: tada
+  animation-name: tada
+  -webkit-animation-duration: 1s
+  animation-duration: 1s
+  -webkit-animation-fill-mode: both
+  animation-fill-mode: both
+  animation-iteration-count: infinite
+
+@-webkit-keyframes tada
+  0%
+  -webkit-transform: scale3d(1, 1, 1)
+  transform: scale3d(1, 1, 1)
+
+  10%, 20%
+  -webkit-transform: scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, -3deg)
+  transform: scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, -3deg)
+
+  30%, 50%, 70%, 90%
+  -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg)
+  transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg)
+
+  40%, 60%, 80%
+  -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg)
+  transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg)
+
+  100%
+  -webkit-transform: scale3d(1, 1, 1)
+  transform: scale3d(1, 1, 1)
+
+@keyframes tada
+  0%
+    -webkit-transform: scale3d(1, 1, 1)
+    transform: scale3d(1, 1, 1)
+
+  10%, 20%
+    -webkit-transform: scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, -3deg)
+    transform: scale3d(0.9, 0.9, 0.9) rotate3d(0, 0, 1, -3deg)
+
+  30%, 50%, 70%, 90%
+    -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg)
+    transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg)
+
+  40%, 60%, 80%
+    -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg)
+    transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg)
+
+  100%
+    -webkit-transform: scale3d(1, 1, 1)
+    transform: scale3d(1, 1, 1)

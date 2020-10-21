@@ -36,26 +36,19 @@ class Home extends React.Component {
                   <StatusPage
                     src="/images/pokemon_logo.png"
                     style={{ width: "200px", height: "100vh", marginTop: -130 }}
-                    title={
-                      this.props.state.errorMessage
-                        ? "Oops! No pokemon found!"
-                        : this.props.state.errorMessage
-                    }
+                    title="Oops! No pokemon found!"
                   />
                 ) : (
-                  <div
-                    style={{ height: "calc(100vh - 18vh)" }}
-                    className="w-100 overflow-auto"
-                  >
+                  <div className="w-100 overflow-auto">
                     <InfiniteScroll
                       dataLength={this.props.state.pokemonList.length}
                       next={() =>
                         this.props.dispatch({
                           type: "FETCH_POKEMON",
-                          payload: 20,
+                          payload: 10,
                         })
                       }
-                      hasMore={true}
+                      hasMore={!this.props.state.filter.name}
                       loader={
                         <div className="text-center">
                           <div
@@ -76,7 +69,16 @@ class Home extends React.Component {
             </ColumnFirst>
           </div>
           <div className="col-12 col-md-6">
-            <ColumnFirst>
+            <ColumnFirst
+              style={{
+                position: "sticky",
+                height: "100vh",
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+              }}
+            >
               <div className="vh-100 d-flex flex-column align-items-center justify-content-center">
                 {this.props.state.isFetchDetail ? (
                   <h1>loading . . .</h1>
