@@ -1,6 +1,6 @@
-import React from "react";
+import React, { memo } from "react";
 
-const Brand = (props) => {
+const Brand = memo((props) => {
   return (
     <img
       alt={props.src}
@@ -9,6 +9,6 @@ const Brand = (props) => {
       className={["", props.className].join(" ")}
     />
   );
-};
+});
 
 export default Brand;

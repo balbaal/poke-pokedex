@@ -1,6 +1,6 @@
-import React from "react";
+import React, { memo } from "react";
 
-const StatusPage = (props) => {
+const StatusPage = memo((props) => {
   return (
     <div
       style={props.style}
@@ -12,6 +12,6 @@ const StatusPage = (props) => {
       </h1>
     </div>
   );
-};
+});
 
 export default StatusPage;

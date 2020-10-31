@@ -1,7 +1,7 @@
-import React from "react";
+import React, { memo } from "react";
 import { GlobalConsumer } from "configs/context";
 
-const Table = (props) => {
+const Table = memo((props) => {
   return (
     <table className="table table-hover table-pokemon">
       <thead>
@@ -42,6 +42,6 @@ const Table = (props) => {
       </tbody>
     </table>
   );
-};
+});
 
 export default GlobalConsumer(Table);

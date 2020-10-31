@@ -1,7 +1,7 @@
-import React from "react";
+import React, { memo } from "react";
 import Select from "react-select";
 
-const Input = (props) => {
+const Input = memo((props) => {
   if (props.type === "select") {
     return (
       <Select
@@ -22,6 +22,6 @@ const Input = (props) => {
       className={["form-control", props.className].join(" ")}
     />
   );
-};
+});
 
 export default Input;
